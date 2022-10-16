@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Setter
@@ -14,15 +16,20 @@ public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "id_user" )
     private Long idUser;
 
-    @Column(unique = true)
+    @NotEmpty(message = "Username tidak boleh kosong")
+    @Column(length = 50)
     private String username;
 
-    @Column(unique = true)
+    @Email(message = "Email tidak valid")
+    @NotEmpty(message = "Email tidak boleh kosong")
+    @Column(length = 50)
     private String email;
 
+    @NotEmpty(message = "Password tidak boleh kosong")
+    @Column(length = 50)
     private String password;
 
 }

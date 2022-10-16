@@ -26,11 +26,11 @@
 //    @JoinColumn(name = "id_schedule")
 //    private ScheduleEntity schedule;
 //
-//    @OneToOne
+//    @ManyToOne
 //    @JoinColumn(name = "id_seat")
 //    private SeatEntity seat;
 //
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "created_at")
-//    private Date createdAt;
+//
 //}
+
+

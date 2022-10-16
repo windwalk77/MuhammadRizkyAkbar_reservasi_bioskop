@@ -16,33 +16,33 @@ public class ScheduleController {
     @Autowired
     private ScheduleServiceImpl scheduleService;
 
-    @PostMapping("/create")
-    public ScheduleEntity create(@RequestBody ScheduleEntity schedule){
-        return scheduleService.addSchedule(schedule);
-    }
+//    @PostMapping("/create")
+//    public ScheduleEntity create(@RequestBody ScheduleEntity schedule){
+//        return scheduleService.addSchedule(schedule);
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ScheduleEntity findSchedule(@PathVariable("id") Long ID){
+//        return scheduleService.findSchedule(ID);
+//    }
+//
+//    @PutMapping("/update")
+//    public ScheduleEntity updateSchedule(@RequestBody ScheduleEntity schedule){
+//        return scheduleService.updateSchedule(schedule);
+//    }
+//
+//    @DeleteMapping("/delete/{id}")
+//    public void deleteSchedule(@PathVariable("id") Long ID){
+//        scheduleService.deleteSchedule(ID);
+//    }
+//
+//    @GetMapping("/all")
+//    public Iterable<ScheduleEntity> findAllSchedule(){
+//        return scheduleService.findAll();
+//    }
 
-    @GetMapping("/{id}")
-    public ScheduleEntity findSchedule(@PathVariable("id") Long ID){
-        return scheduleService.findSchedule(ID);
-    }
-
-    @PutMapping("/update")
-    public ScheduleEntity updateSchedule(@RequestBody ScheduleEntity schedule){
-        return scheduleService.updateSchedule(schedule);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteSchedule(@PathVariable("id") Long ID){
-        scheduleService.deleteSchedule(ID);
-    }
-
-    @GetMapping("/all")
-    public Iterable<ScheduleEntity> findAllSchedule(){
-        return scheduleService.findAll();
-    }
-
-    @GetMapping("/all/{id}")
-    public List<ScheduleEntity> findByMovie(@PathVariable("id") Long Id){
+    @GetMapping("/all/{idFilm}")
+    public List<ScheduleEntity> findByMovie(@PathVariable("idFilm") Long Id){
        return scheduleService.findByMovie(Id);
     }
 }
