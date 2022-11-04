@@ -1,5 +1,6 @@
 package org.binar.challenge4_bejava.services;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.binar.challenge4_bejava.dto.InvoiceData;
@@ -13,10 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public JasperPrint generateInvoice(InvoiceData data)throws FileNotFoundException, JRException {
+
 
         Map<String, Object> dataMap = dataParameter(data);
         List<InvoiceData> ordersCollect = new LinkedList<>();
@@ -29,6 +32,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 , dataMap
                 , new JREmptyDataSource()
         );
+        log.info("Succesfully Generate Invoice");
         return jasperPrint;
 
     }

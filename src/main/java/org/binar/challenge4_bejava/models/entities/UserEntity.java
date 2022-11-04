@@ -1,15 +1,21 @@
 package org.binar.challenge4_bejava.models.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Users")
 public class UserEntity implements Serializable {
@@ -29,7 +35,13 @@ public class UserEntity implements Serializable {
     private String email;
 
     @NotEmpty(message = "Password tidak boleh kosong")
-    @Column(length = 50)
+    @Column
     private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles = new HashSet<>();
+
 
 }

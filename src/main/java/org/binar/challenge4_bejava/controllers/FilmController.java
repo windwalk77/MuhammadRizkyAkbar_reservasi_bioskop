@@ -1,6 +1,7 @@
 package org.binar.challenge4_bejava.controllers;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.binar.challenge4_bejava.dto.ResponseData;
 import org.binar.challenge4_bejava.models.entities.FilmEntity;
 import org.binar.challenge4_bejava.models.entities.UserEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@Slf4j
 @RequestMapping("/film")
 public class FilmController {
     @Autowired
@@ -32,13 +34,15 @@ public class FilmController {
             }
             responseData.setStatus(false);
             responseData.setPayload(null);
+            log.error("Failed to add film");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         }
         responseData.setStatus(true);
         responseData.setPayload(filmService.addFilm(film));
+        log.error("Successfully add film");
         return ResponseEntity.ok(responseData);
     }
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public FilmEntity findFilm(@PathVariable("id") Long ID){
         return filmService.findFilm(ID);
     }
@@ -53,10 +57,13 @@ public class FilmController {
             }
             responseData.setStatus(false);
             responseData.setPayload(null);
+            log.error("Failed to update film");
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         }
         responseData.setStatus(true);
         responseData.setPayload(filmService.addFilm(film));
+        log.error("Successfully update film");
         return ResponseEntity.ok(responseData);
     }
 
@@ -65,13 +72,14 @@ public class FilmController {
         filmService.deleteFilm(ID);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/get/all")
     public Iterable<FilmEntity> findAllFilms(){
         return filmService.findAll();
     }
 
-    @GetMapping("/allAvailable")
+    @GetMapping("/get/allAvailable")
     public List<FilmEntity> findAvailableFilms(){
+        log.info("Successfully find available film");
         List<FilmEntity> filmsAvailable = filmService.findAll().stream().filter(FilmEntity::isStatus).collect(Collectors.toList());
         return filmsAvailable;
     }
