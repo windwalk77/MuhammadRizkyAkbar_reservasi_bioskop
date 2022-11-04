@@ -26,16 +26,13 @@ public class UserEntity implements Serializable {
     private Long idUser;
 
     @NotEmpty(message = "Username tidak boleh kosong")
-    @Column(length = 50)
     private String username;
 
     @Email(message = "Email tidak valid")
     @NotEmpty(message = "Email tidak boleh kosong")
-    @Column(length = 50)
     private String email;
 
     @NotEmpty(message = "Password tidak boleh kosong")
-    @Column
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
