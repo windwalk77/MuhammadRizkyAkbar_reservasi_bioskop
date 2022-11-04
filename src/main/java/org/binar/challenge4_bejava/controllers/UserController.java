@@ -154,11 +154,12 @@ public class UserController {
             }
             responseData.setStatus(false);
             responseData.setPayload(null);
+            log.error("Update user failed");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         }
         responseData.setStatus(true);
         responseData.setPayload(userService.addUser(user));
-        log.error("Update user failed");
+
 
         return ResponseEntity.ok(responseData);
     }
