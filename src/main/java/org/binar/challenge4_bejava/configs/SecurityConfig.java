@@ -80,8 +80,8 @@ public class SecurityConfig {
                 //Admin
                 .antMatchers("/film/create").hasAnyAuthority("ADMIN")
                 .antMatchers("/film/update").hasAnyAuthority("ADMIN")
-                .antMatchers("/film/delete/**").hasAnyAuthority("ADMIN")
-                .anyRequest().permitAll();
+                .antMatchers("/film/delete/**").hasAnyAuthority("ADMIN");
+
 
         http.authenticationProvider(authenticationProvider());
 
@@ -89,4 +89,5 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }
