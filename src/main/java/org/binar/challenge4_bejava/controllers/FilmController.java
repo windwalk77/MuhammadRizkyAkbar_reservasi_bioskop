@@ -1,6 +1,7 @@
 package org.binar.challenge4_bejava.controllers;
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.binar.challenge4_bejava.dto.ResponseData;
 import org.binar.challenge4_bejava.models.entities.FilmEntity;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/film")
 public class FilmController {
     @Autowired

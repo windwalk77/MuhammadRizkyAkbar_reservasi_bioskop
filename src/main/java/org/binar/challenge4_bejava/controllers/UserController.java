@@ -1,5 +1,6 @@
 package org.binar.challenge4_bejava.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.binar.challenge4_bejava.dto.*;
 import org.binar.challenge4_bejava.models.entities.RoleEntity;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/user")
 public class UserController {
 

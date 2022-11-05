@@ -1,5 +1,6 @@
 package org.binar.challenge4_bejava.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/invoice")
 public class InvoiceController {
 
