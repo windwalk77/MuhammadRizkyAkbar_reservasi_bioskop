@@ -1,5 +1,6 @@
 package org.binar.challenge4_bejava.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.binar.challenge4_bejava.models.entities.FilmEntity;
 import org.binar.challenge4_bejava.models.entities.ScheduleEntity;
 import org.binar.challenge4_bejava.services.ScheduleServiceImpl;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/schedule")
 public class ScheduleController {
 
