@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Repository
 public interface ScheduleRepos extends JpaRepository<ScheduleEntity,Long> {
-    @Query("select s from ScheduleEntity s where s.Film.idFilm = ?1")
+    @Query("select s from ScheduleEntity s where s.film.idFilm = ?1")
     List<ScheduleEntity> findScheduleByMoviesId(Long idFilm);
 }

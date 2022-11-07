@@ -1,13 +1,11 @@
 package org.binar.challenge4_bejava.services;
 
 import lombok.extern.slf4j.Slf4j;
-import org.binar.challenge4_bejava.models.entities.FilmEntity;
 import org.binar.challenge4_bejava.models.entities.ScheduleEntity;
 import org.binar.challenge4_bejava.models.repos.ScheduleRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

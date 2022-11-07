@@ -70,6 +70,11 @@ public class UserDetailImpl implements UserDetails {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(id, username, email, password, authorities);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -78,4 +83,6 @@ public class UserDetailImpl implements UserDetails {
         UserDetailImpl user = (UserDetailImpl) o;
         return Objects.equals(id, user.id);
     }
+
+
 }

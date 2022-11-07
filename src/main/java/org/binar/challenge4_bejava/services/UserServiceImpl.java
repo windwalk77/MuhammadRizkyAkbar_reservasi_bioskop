@@ -1,5 +1,6 @@
 package org.binar.challenge4_bejava.services;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.binar.challenge4_bejava.models.entities.UserEntity;
 import org.binar.challenge4_bejava.models.repos.UserRepos;
@@ -10,11 +11,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepos userRepos;
+
 
     @Override
     public UserEntity addUser(UserEntity user) {
@@ -42,7 +45,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<UserEntity> findAll() {
+    public List<UserEntity> findAllUser() {
         log.info("Succesfully Find All User");
         return userRepos.findAll();
     }

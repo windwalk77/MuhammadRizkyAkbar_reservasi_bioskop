@@ -1,4 +1,4 @@
-package org.binar.challenge4_bejava.services.userSecurity;
+package org.binar.challenge4_bejava.services;
 
 import org.binar.challenge4_bejava.models.entities.UserDetailImpl;
 import org.binar.challenge4_bejava.models.entities.UserEntity;

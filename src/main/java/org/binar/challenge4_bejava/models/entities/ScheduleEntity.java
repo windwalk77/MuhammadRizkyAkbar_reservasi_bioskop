@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
+
 
 @Setter
 @Getter
@@ -24,7 +24,7 @@ public class ScheduleEntity implements Serializable {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_film")
-    private FilmEntity Film;
+    private FilmEntity film;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate tanggal;

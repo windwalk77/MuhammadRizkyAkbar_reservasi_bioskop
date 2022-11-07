@@ -1,5 +1,6 @@
 package org.binar.challenge4_bejava.services;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.binar.challenge4_bejava.models.entities.FilmEntity;
 import org.binar.challenge4_bejava.models.entities.UserEntity;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class FilmServiceImpl implements FilmService {
 
     @Autowired
