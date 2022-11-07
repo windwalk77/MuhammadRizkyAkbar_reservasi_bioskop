@@ -3,6 +3,7 @@ package org.binar.challenge4_bejava.controllers;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.binar.challenge4_bejava.dto.*;
+import org.binar.challenge4_bejava.exceptions.UserException;
 import org.binar.challenge4_bejava.models.entities.RoleEntity;
 import org.binar.challenge4_bejava.models.entities.UserDetailImpl;
 import org.binar.challenge4_bejava.models.entities.UserEntity;
@@ -10,6 +11,7 @@ import org.binar.challenge4_bejava.models.repos.RoleRepos;
 import org.binar.challenge4_bejava.models.repos.UserRepos;
 import org.binar.challenge4_bejava.security.JwtUtils;
 import org.binar.challenge4_bejava.services.UserServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +55,7 @@ public class UserController {
     @Autowired
     JwtUtils jwtUtils;
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpData signUpRequest) {
+    public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignUpData signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             log.error("Username is taken");
             return ResponseEntity
@@ -73,7 +75,7 @@ public class UserController {
         user.setUsername(signUpRequest.getUsername());
         user.setEmail(signUpRequest.getEmail());
 
-                user.setPassword(encoder.encode(signUpRequest.getPassword()));
+        user.setPassword(encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<RoleEntity> roles = new HashSet<>();
@@ -81,19 +83,19 @@ public class UserController {
         if (strRoles == null) {
             RoleEntity userRole = roleRepository.findByName(EnumRole.CUSTOMER)
                     .orElseThrow(() -> {
-                        log.error("Role Not Found");
-                        throw new RuntimeException("Error: Role is not found.");
+                        log.error("Role Not Founds");
+                        throw new UserException("Error: Role is not founds.");
 
                     });
             roles.add(userRole);
-            log.info("Roles is added");
+            log.info("Roles is add");
         } else {
             strRoles.forEach(role -> {
                 if ("ADMIN".equals(role)) {
                     RoleEntity adminRole = roleRepository.findByName(EnumRole.ADMIN)
                             .orElseThrow(() ->{
                                 log.error("Role Not Found");
-                                throw new RuntimeException("Error: Role is not found.");
+                                throw new UserException("Error: Role is not found.");
 
                             });
                     roles.add(adminRole);
@@ -102,7 +104,7 @@ public class UserController {
                     RoleEntity userRole = roleRepository.findByName(EnumRole.CUSTOMER)
                             .orElseThrow(() -> {
                                 log.error("Role Not Found");
-                                throw new RuntimeException("Error: Role is not found.");
+                                throw new UserException("Error: Role is not found.");
 
                             });
                     roles.add(userRole);
@@ -118,7 +120,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LogInData loginRequest) {
+    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LogInData loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -141,13 +143,13 @@ public class UserController {
 
 
     @GetMapping("/get/{id}")
-    public UserEntity findUser(@PathVariable("id") Long ID){
+    public UserEntity findUser(@PathVariable("id") Long id){
 
-        return userService.findUser(ID);
+        return userService.findUser(id);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ResponseData<UserEntity>> update(@Valid @RequestBody UserEntity user , Errors errors){
+    public ResponseEntity<ResponseData<UserEntity>> update(@Valid @RequestBody UserDto userDto , Errors errors, ModelMapper modelMapper){
         ResponseData<UserEntity> responseData = new ResponseData<>();
 
         if(errors.hasErrors()){
@@ -159,20 +161,23 @@ public class UserController {
             log.error("Update user failed");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         }
+
         responseData.setStatus(true);
+        userDto.setPassword(encoder.encode(userDto.getPassword()));
+        UserEntity user = modelMapper.map(userDto,UserEntity.class);
         responseData.setPayload(userService.addUser(user));
 
 
         return ResponseEntity.ok(responseData);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteUser(@PathVariable("id") Long ID){
-        userService.deleteUser(ID);
+    public void deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(id);
     }
 
     @GetMapping("/get/all")
-    public Iterable<UserEntity> findAllFilms(){
-        return userService.findAll();
+    public Iterable<UserEntity> findAllUser(){
+        return userService.findAllUser();
     }
 
 }

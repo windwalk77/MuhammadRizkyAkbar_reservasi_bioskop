@@ -10,6 +10,6 @@ public interface ScheduleService {
     ScheduleEntity updateSchedule(ScheduleEntity schedule);
     ScheduleEntity findSchedule(Long id);
     Iterable<ScheduleEntity> findAll();
-    List<ScheduleEntity> findByMovie(Long ID);
+    List<ScheduleEntity> findByMovie(Long id);
 
 }
