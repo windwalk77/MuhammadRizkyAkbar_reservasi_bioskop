@@ -4,6 +4,7 @@ package org.binar.challenge4_bejava.controllers;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.binar.challenge4_bejava.dto.FilmDto;
+import org.binar.challenge4_bejava.dto.FilmDtoUpdate;
 import org.binar.challenge4_bejava.dto.ResponseData;
 import org.binar.challenge4_bejava.models.entities.FilmEntity;
 import org.binar.challenge4_bejava.services.FilmServiceImpl;
@@ -52,7 +53,7 @@ public class FilmController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ResponseData<FilmEntity>> update(@Valid @RequestBody FilmDto filmDto , Errors errors,ModelMapper modelMapper){
+    public ResponseEntity<ResponseData<FilmEntity>> update(@Valid @RequestBody FilmDtoUpdate filmDto , Errors errors, ModelMapper modelMapper){
         ResponseData<FilmEntity> responseData = new ResponseData<>();
 
         if(errors.hasErrors()){

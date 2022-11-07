@@ -1,6 +1,5 @@
 package org.binar.challenge4_bejava.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,9 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FilmDto {
+public class FilmDtoUpdate {
 
-
+    private Long idFilm;
     private String namaFilm;
 
     private boolean status;
