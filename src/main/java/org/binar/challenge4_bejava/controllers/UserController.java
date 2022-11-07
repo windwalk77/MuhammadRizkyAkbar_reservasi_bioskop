@@ -53,6 +53,8 @@ public class UserController {
     UserRepos userRepository;
 
     @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
     JwtUtils jwtUtils;
     @PostMapping("/signup")
     public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignUpData signUpRequest) {
@@ -149,7 +151,7 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ResponseData<UserEntity>> update(@Valid @RequestBody UserDto userDto , Errors errors, ModelMapper modelMapper){
+    public ResponseEntity<ResponseData<UserEntity>> update(@Valid @RequestBody UserDto userDto , Errors errors){
         ResponseData<UserEntity> responseData = new ResponseData<>();
 
         if(errors.hasErrors()){
