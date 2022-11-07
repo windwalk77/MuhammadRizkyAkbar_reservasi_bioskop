@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -12,7 +14,8 @@ import lombok.Setter;
 public class FilmDtoUpdate {
 
     private Long idFilm;
+    @NotNull(message = "Nama Film tidak boleh kosong")
     private String namaFilm;
-
+    @NotNull(message = "Status tidak boleh kosong")
     private boolean status;
 }

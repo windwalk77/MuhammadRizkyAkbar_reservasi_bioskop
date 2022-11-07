@@ -27,9 +27,11 @@ import java.util.stream.Collectors;
 public class FilmController {
     @Autowired
     private FilmServiceImpl filmService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseData<FilmEntity>> create(@Valid @RequestBody FilmDto filmDto , Errors errors, ModelMapper modelMapper){
+    public ResponseEntity<ResponseData<FilmEntity>> create(@Valid @RequestBody FilmDto filmDto , Errors errors){
         ResponseData<FilmEntity> responseData = new ResponseData<>();
 
         if(errors.hasErrors()){
@@ -53,7 +55,7 @@ public class FilmController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ResponseData<FilmEntity>> update(@Valid @RequestBody FilmDtoUpdate filmDto , Errors errors, ModelMapper modelMapper){
+    public ResponseEntity<ResponseData<FilmEntity>> update(@Valid @RequestBody FilmDtoUpdate filmDto , Errors errors){
         ResponseData<FilmEntity> responseData = new ResponseData<>();
 
         if(errors.hasErrors()){
