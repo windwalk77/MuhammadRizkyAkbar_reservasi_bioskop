@@ -24,7 +24,7 @@ public class ScheduleEntity implements Serializable {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_film" , referencedColumnName = "id_film")
-    private FilmEntity film;
+    private Film film;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate tanggal;
