@@ -1,7 +1,7 @@
 package com.binar.schedules.controllers;
 
 import com.binar.schedules.dto.ScheduleDto;
-import com.binar.schedules.models.entities.FilmEntity;
+import com.binar.schedules.models.entities.Film;
 import com.binar.schedules.models.entities.ScheduleEntity;
 import com.binar.schedules.services.ScheduleServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -31,10 +31,10 @@ public class ScheduleController {
     @PostMapping("/create")
     public ResponseEntity<ScheduleEntity> createSchedule(@RequestBody ScheduleDto scheduleDto){
         ScheduleEntity schedule = modelMapper.map(scheduleDto,ScheduleEntity.class) ;
-        FilmEntity filmEntity = webClient.get()
+        Film film = webClient.get()
                 .uri("http://localhost:7072/film/get/"+scheduleDto.getFilmId())
-                        .retrieve().bodyToMono(FilmEntity.class).block();
-        schedule.setFilm(filmEntity);
+                        .retrieve().bodyToMono(Film.class).block();
+        schedule.setFilm(film);
         return new ResponseEntity<>(scheduleService.addSchedule(schedule), HttpStatus.OK);
     }
     @GetMapping("/all/{idFilm}")
